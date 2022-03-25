@@ -1,4 +1,4 @@
-export const uDonate_address = "0x77E8B2c491F0FE9CfCaF3f1567d8ee5214D9EA32";
+export const uDonate_address = "0xF2eB5479cfc0B3b6bf6CD7b61162286a7e6Bc7d2";
 export const uDonate_abi = [
     {
         inputs: [],
@@ -101,6 +101,34 @@ export const uDonate_abi = [
         type: "event",
         signature:
             "0xbcf175fafdc2c700b6f34b77059a62413286eabf1656c4ab623e5a2f4e6caecd",
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                internalType: "address",
+                name: "account",
+                type: "address",
+            },
+            {
+                indexed: true,
+                internalType: "address",
+                name: "sender",
+                type: "address",
+            },
+            { indexed: false, internalType: "string", name: "name", type: "string" },
+            {
+                indexed: false,
+                internalType: "string",
+                name: "residence",
+                type: "string",
+            },
+        ],
+        name: "CreateUser",
+        type: "event",
+        signature:
+            "0xbad769947ec6434da1f5f8a775fa33034378b48b45a9ffeb4825a423e00b495a",
     },
     {
         anonymous: false,
@@ -248,34 +276,6 @@ export const uDonate_abi = [
         anonymous: false,
         inputs: [
             {
-                indexed: true,
-                internalType: "address",
-                name: "account",
-                type: "address",
-            },
-            {
-                indexed: true,
-                internalType: "address",
-                name: "sender",
-                type: "address",
-            },
-            { indexed: false, internalType: "string", name: "name", type: "string" },
-            {
-                indexed: false,
-                internalType: "string",
-                name: "residence",
-                type: "string",
-            },
-        ],
-        name: "User",
-        type: "event",
-        signature:
-            "0x37b8e11615f93e97e61704adcedb9e0b0232a177b63748223b9b99c4deb6389b",
-    },
-    {
-        anonymous: false,
-        inputs: [
-            {
                 indexed: false,
                 internalType: "uint256",
                 name: "tokenId",
@@ -323,6 +323,15 @@ export const uDonate_abi = [
             "0x6cb8093df5b93867d2629eb7a573d80835e0a18e8408fef1cee696cb7e683ffe",
     },
     {
+        inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
+        name: "_getRollbackDates",
+        outputs: [{ internalType: "uint256[]", name: "", type: "uint256[]" }],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+        signature: "0x17be8d0d",
+    },
+    {
         inputs: [{ internalType: "uint256", name: "transferId", type: "uint256" }],
         name: "acceptTransfer",
         outputs: [],
@@ -342,6 +351,14 @@ export const uDonate_abi = [
         signature: "0x095ea7b3",
     },
     {
+        inputs: [{ internalType: "address", name: "account", type: "address" }],
+        name: "approveUser",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+        signature: "0xd624fdb6",
+    },
+    {
         inputs: [{ internalType: "address", name: "owner", type: "address" }],
         name: "balanceOf",
         outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
@@ -349,14 +366,6 @@ export const uDonate_abi = [
         type: "function",
         constant: true,
         signature: "0x70a08231",
-    },
-    {
-        inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
-        name: "burn",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-        signature: "0x42966c68",
     },
     {
         inputs: [{ internalType: "uint256", name: "transferId", type: "uint256" }],
@@ -369,12 +378,22 @@ export const uDonate_abi = [
     {
         inputs: [
             { internalType: "address", name: "account", type: "address" },
+            { internalType: "uint256", name: "status", type: "uint256" },
+        ],
+        name: "changeStatus",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+        signature: "0xb1ec5cc6",
+    },
+    {
+        inputs: [
             {
                 components: [
                     { internalType: "string", name: "name", type: "string" },
                     { internalType: "string", name: "residence", type: "string" },
                 ],
-                internalType: "struct NbmUser.UserStruct",
+                internalType: "struct NbmUser.UserData",
                 name: "user",
                 type: "tuple",
             },
@@ -383,7 +402,7 @@ export const uDonate_abi = [
         outputs: [],
         stateMutability: "nonpayable",
         type: "function",
-        signature: "0xbe1d4e25",
+        signature: "0xb00f3c19",
     },
     {
         inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
@@ -448,6 +467,15 @@ export const uDonate_abi = [
         signature: "0xc8691b2a",
     },
     {
+        inputs: [{ internalType: "address", name: "account", type: "address" }],
+        name: "getStatus",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+        signature: "0x30ccebb5",
+    },
+    {
         inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
         name: "getTokenOwners",
         outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
@@ -465,7 +493,7 @@ export const uDonate_abi = [
                     { internalType: "string", name: "name", type: "string" },
                     { internalType: "string", name: "residence", type: "string" },
                 ],
-                internalType: "struct NbmUser.UserStruct",
+                internalType: "struct NbmUser.UserData",
                 name: "",
                 type: "tuple",
             },
@@ -486,6 +514,15 @@ export const uDonate_abi = [
         type: "function",
         constant: true,
         signature: "0xc47c9f3c",
+    },
+    {
+        inputs: [{ internalType: "address", name: "account", type: "address" }],
+        name: "isActive",
+        outputs: [{ internalType: "bool", name: "", type: "bool" }],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+        signature: "0x9f8a13d7",
     },
     {
         inputs: [
@@ -599,6 +636,25 @@ export const uDonate_abi = [
     },
     {
         inputs: [
+            { internalType: "address", name: "account", type: "address" },
+            {
+                components: [
+                    { internalType: "string", name: "name", type: "string" },
+                    { internalType: "string", name: "residence", type: "string" },
+                ],
+                internalType: "struct NbmUser.UserData",
+                name: "user",
+                type: "tuple",
+            },
+        ],
+        name: "proxyCreateUser",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+        signature: "0xc36adf9c",
+    },
+    {
+        inputs: [
             { internalType: "uint256", name: "transferId", type: "uint256" },
             { internalType: "string", name: "message", type: "string" },
         ],
@@ -609,12 +665,28 @@ export const uDonate_abi = [
         signature: "0x6b43c9e4",
     },
     {
+        inputs: [{ internalType: "address", name: "account", type: "address" }],
+        name: "rejectUser",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+        signature: "0x4dc92885",
+    },
+    {
         inputs: [],
         name: "renounceOwnership",
         outputs: [],
         stateMutability: "nonpayable",
         type: "function",
         signature: "0x715018a6",
+    },
+    {
+        inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
+        name: "rollback",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+        signature: "0x0da9da20",
     },
     {
         inputs: [
@@ -701,6 +773,17 @@ export const uDonate_abi = [
         signature: "0x95d89b41",
     },
     {
+        inputs: [
+            { internalType: "address", name: "account", type: "address" },
+            { internalType: "bool", name: "active", type: "bool" },
+        ],
+        name: "toggleActivity",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+        signature: "0x229e4565",
+    },
+    {
         inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
         name: "tokenTransfers",
         outputs: [{ internalType: "uint256[]", name: "", type: "uint256[]" }],
@@ -774,6 +857,15 @@ export const uDonate_abi = [
         type: "function",
         constant: true,
         signature: "0x927e9742",
+    },
+    {
+        inputs: [],
+        name: "userPendingList",
+        outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+        signature: "0xcb246d82",
     },
     {
         inputs: [{ internalType: "bytes4", name: "interfaceId", type: "bytes4" }],

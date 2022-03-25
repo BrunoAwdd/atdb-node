@@ -1,4 +1,4 @@
-const provider = 'https://data-seed-prebsc-1-s1.binance.org:8545/';
+const provider = 'https://bsc-dataseed.binance.org/';
 const Web3 = require('web3');
 let web3: any;
 

@@ -1,5 +1,6 @@
 var router = require('express').Router();
 
+router.use('/account', require('./account-route'));
 router.use('/nimble', require('./nimble-route'));
 router.use('/farms', require('./farms-route'));
 router.use('/wallet', require('./wallet'));

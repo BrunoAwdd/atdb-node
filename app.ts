@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import express from 'express';
 
 //Web3
@@ -47,8 +46,9 @@ app.use(cors());
 
 // Normal express config defaults
 app.use(require('morgan')('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
+
 app.use(require('method-override')());
 app.use(express.static(__dirname + '/public'));
 app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
